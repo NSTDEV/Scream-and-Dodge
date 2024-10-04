@@ -24,8 +24,8 @@ public class VoiceCommandController : MonoBehaviour
         {
             { "izquierda", MoveLeft },
             { "derecha", MoveRight },
-            { "medio", MoveToCenter },
-            { "salto", Jump }
+            { "centro", MoveToCenter },
+            { "salta", Jump }
         };
 
         keywordRecognizer = new KeywordRecognizer(keywords.Keys.ToArray());
