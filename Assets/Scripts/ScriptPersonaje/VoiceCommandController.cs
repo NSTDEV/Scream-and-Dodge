@@ -7,7 +7,7 @@ using System.Linq;
 public class VoiceCommandController : MonoBehaviour
 {
     public float moveSpeed = 5f;
-    public float jumpForce = 10f;
+    public float jumpForce = 2.5f;
     public float invincibleLength = 2f; // Duración de la invulnerabilidad tras el salto
     private Vector3 initialPosition;
 
@@ -127,7 +127,12 @@ public class VoiceCommandController : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             StartCoroutine(ReturnToGround());
             isGrounded = false;
-            
+
+            Vector3 newPosition = transform.position;
+            newPosition.z = -3; // Cambiar solo el valor en el eje Z
+            transform.position = newPosition;
+            GetComponent<Collider2D>().isTrigger = true;
+
             // Activar invulnerabilidad
             invincibleCounter = invincibleLength;
             theSR.color = new Color(theSR.color.r, theSR.color.g, theSR.color.b, 0.5f); // Cambiar transparencia
@@ -149,6 +154,11 @@ public class VoiceCommandController : MonoBehaviour
             // Desactivar invulnerabilidad al tocar el suelo
             invincibleCounter = 0;
             theSR.color = new Color(theSR.color.r, theSR.color.g, theSR.color.b, 1f); // Restaurar el color
+        }
+        else
+        {
+            // Si aún no ha llegado al suelo, puedes seguir aplicando gravedad
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y - jumpForce * Time.deltaTime); // Ejemplo de gravedad adicional
         }
     }
 }

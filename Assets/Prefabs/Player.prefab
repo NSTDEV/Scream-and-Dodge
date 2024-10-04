@@ -5010,6 +5010,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   jumpForce: 10
+  invincibleLength: 2
   isGrounded: 1
 --- !u!114 &2554666006912848497
 MonoBehaviour:

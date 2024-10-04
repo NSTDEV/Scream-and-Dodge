@@ -1451,11 +1451,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2266591539773228544, guid: 40a11cb0a3bf1cf4d822aca697166deb, type: 3}
       propertyPath: tiempoMaximo
-      value: 9
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 2266591539773228544, guid: 40a11cb0a3bf1cf4d822aca697166deb, type: 3}
       propertyPath: tiempoMinimo
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7843157385540259758, guid: 40a11cb0a3bf1cf4d822aca697166deb, type: 3}
       propertyPath: m_Name
@@ -2349,6 +2349,10 @@ PrefabInstance:
       propertyPath: m_GravityScale
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6422315495174827713, guid: 5650896c10f0da341b6ef2b9849bd64e, type: 3}
+      propertyPath: jumpForce
+      value: 2.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2625,20 +2629,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2266591539773228544, guid: 40a11cb0a3bf1cf4d822aca697166deb, type: 3}
       propertyPath: tiempoMaximo
-      value: 2
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 2266591539773228544, guid: 40a11cb0a3bf1cf4d822aca697166deb, type: 3}
       propertyPath: tiempoMinimo
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2266591539773228544, guid: 40a11cb0a3bf1cf4d822aca697166deb, type: 3}
       propertyPath: prefabs.Array.data[1]
       value: 
-      objectReference: {fileID: 3621780732433347512, guid: 2b6d7ab0910029a40ac06f259b15906b, type: 3}
+      objectReference: {fileID: 7443925814795743582, guid: 94d68f9e08952e4459b8bc1c938dcc29, type: 3}
     - target: {fileID: 2266591539773228544, guid: 40a11cb0a3bf1cf4d822aca697166deb, type: 3}
       propertyPath: prefabs.Array.data[2]
       value: 
-      objectReference: {fileID: 3621780732433347512, guid: 2b6d7ab0910029a40ac06f259b15906b, type: 3}
+      objectReference: {fileID: 2171310382751477395, guid: 6f4a6d1d53b0b014a92dc1bba72ea93e, type: 3}
     - target: {fileID: 7843157385540259758, guid: 40a11cb0a3bf1cf4d822aca697166deb, type: 3}
       propertyPath: m_Name
       value: Generador (1)
