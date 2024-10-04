@@ -255,14 +255,15 @@ public class CollisionController : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
 
         // Verificamos si colisiona con uno de los obstáculos
-        if (other.gameObject.CompareTag("Obstacle") || other.gameObject.CompareTag("Obstacle2"))
+         if (collision.gameObject.CompareTag("Obstacle") || collision.gameObject.CompareTag("Obstacle2") )
         {
 
-            if (invincibleCounter <= 0)
+     
+           if (invincibleCounter <= 0)
             {
                 Debug.Log("Colisión detectada");
                 collisionCount++;
@@ -277,7 +278,7 @@ public class CollisionController : MonoBehaviour
                     globalScript.UpdateSpeed(playerMoveSpeed);
                 }
 
-                if (collisionCount >= 3)
+                if (collisionCount >= 3 || collision.gameObject.CompareTag("Obstacle2") )
                 {
                     StartCoroutine(MoveBearToPlayer(transform.position, 2f)); // Mover al oso directamente sobre el esquiador y esperar antes de cargar la escena
                 }
@@ -287,17 +288,30 @@ public class CollisionController : MonoBehaviour
                     theSR.color = new Color(theSR.color.r, theSR.color.g, theSR.color.b, 0.5f);
 
                 }
-                if (collisionCount <= 3)
+                if (collisionCount < 3)
                 {
                     StartCoroutine(MoveBearTowardsSkier());
                 }
             }
 
             // Destruir el obstáculo al colisionar con el esquiador
-            Destroy(other.gameObject);
+            Destroy(collision.gameObject);
         }
 
     }
+
+     /**El metodo On TriggerEnter sirve para que al estar en modo Trigger aun asi choque con el obstaculo3 que aunque saltemos no lo esquivaremos*/
+    private void OnTriggerEnter2D(Collider2D other)
+{
+    // Verificar si el collider que se ha activado es el Obstacle3
+    if (other.CompareTag("Obstacle2"))
+    {
+       StartCoroutine(MoveBearToPlayer(transform.position, 2f)); // Mover al oso directamente sobre el esquiador y esperar antes de cargar la escena
+       
+        /*// Cambiar a la escena de perder
+        SceneManager.LoadScene("Lose"); // Asegúrate de que "Lose" sea el nombre correcto de tu escena*/
+    }
+}
 
     private IEnumerator MoveBearTowardsSkier()
     {
@@ -344,7 +358,7 @@ public class CollisionController : MonoBehaviour
 
         invincibleCounter = invincibleLength;
         // Cargar la escena de "Perder"
-        StartCoroutine(WaitAndLoadScene(2f)); // Esperar 2 segundos
+        StartCoroutine(WaitAndLoadScene(1f)); // Esperar 1 segundos
     }
 
     private IEnumerator WaitAndLoadScene(float waitTime)

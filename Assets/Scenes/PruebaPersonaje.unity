@@ -2343,11 +2343,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4366696708057376543, guid: 5650896c10f0da341b6ef2b9849bd64e, type: 3}
       propertyPath: m_IsTrigger
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4605321711322953002, guid: 5650896c10f0da341b6ef2b9849bd64e, type: 3}
       propertyPath: m_GravityScale
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6422315495174827713, guid: 5650896c10f0da341b6ef2b9849bd64e, type: 3}
+      propertyPath: jumpForce
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
