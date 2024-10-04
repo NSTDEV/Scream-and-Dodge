@@ -404,6 +404,7 @@ GameObject:
   - component: {fileID: 409780400}
   - component: {fileID: 409780399}
   - component: {fileID: 409780398}
+  - component: {fileID: 409780401}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -461,6 +462,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &409780401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 409780397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 649323673a313f14999dafa7d1302f65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1693379214}
+  parallax1: {fileID: 1254251405}
+  parallax2: {fileID: 777688503}
+  speed: {fileID: 100042374}
+  km: {fileID: 55893920}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -2221,6 +2239,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1693379214 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2554666006912848497, guid: 5650896c10f0da341b6ef2b9849bd64e, type: 3}
+  m_PrefabInstance: {fileID: 1719638342}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1693379204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88325a892f8912b4aa71b7f31a2060c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1719638342
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2282,8 +2311,20 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2554666006912848497, guid: 5650896c10f0da341b6ef2b9849bd64e, type: 3}
+      propertyPath: playerHitSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 40406c65674393647972180394a3e5e1, type: 3}
+    - target: {fileID: 2554666006912848497, guid: 5650896c10f0da341b6ef2b9849bd64e, type: 3}
+      propertyPath: playerMoveSpeed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2554666006912848497, guid: 5650896c10f0da341b6ef2b9849bd64e, type: 3}
       propertyPath: invincibleLength
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2554666006912848497, guid: 5650896c10f0da341b6ef2b9849bd64e, type: 3}
+      propertyPath: playerAudioSource
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4366696708057376543, guid: 5650896c10f0da341b6ef2b9849bd64e, type: 3}
       propertyPath: m_IsTrigger

@@ -217,6 +217,9 @@ public class CollisionController : MonoBehaviour
     public float bearMoveSpeed = 0.5f; // Velocidad de movimiento del oso
     public float playerMoveSpeed = 4f; // Velocidad de movimiento del jugador
     private int collisionCount = 0; // Contador de colisiones
+    public GLOBAL globalScript;
+
+    public AudioSource collisionAudioSource, bearAudioSource;
 
     public float invincibleLength;
     private float invincibleCounter;
@@ -228,6 +231,7 @@ public class CollisionController : MonoBehaviour
     {
         voiceCommandController = GetComponent<VoiceCommandController>();
         theSR = GetComponent<SpriteRenderer>();
+        globalScript = FindObjectOfType<GLOBAL>();
     }
 
     private void Update()
@@ -244,40 +248,50 @@ public class CollisionController : MonoBehaviour
         if (invincibleCounter > 0)
         {
             invincibleCounter -= Time.deltaTime;
-            if(invincibleCounter <= 0 )
+            if (invincibleCounter <= 0)
             {
-                theSR.color = new Color(theSR.color.r, theSR.color.g, theSR.color.b,1f);
+                theSR.color = new Color(theSR.color.r, theSR.color.g, theSR.color.b, 1f);
             }
         }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        
+
         // Verificamos si colisiona con uno de los obstáculos
         if (other.gameObject.CompareTag("Obstacle") || other.gameObject.CompareTag("Obstacle2"))
         {
-           if (invincibleCounter <= 0)
-          {
-            Debug.Log("Colisión detectada");
-            collisionCount++;
-            Debug.Log("Contador de colisiones: " + collisionCount);
 
-            // Si el jugador colisiona 3 veces
-            if (collisionCount >= 3)
+            if (invincibleCounter <= 0)
             {
-                StartCoroutine(MoveBearToPlayer(transform.position, 2f)); // Mover al oso directamente sobre el esquiador y esperar antes de cargar la escena
+                Debug.Log("Colisión detectada");
+                collisionCount++;
+                Debug.Log("Contador de colisiones: " + collisionCount);
+
+                playerMoveSpeed = playerMoveSpeed / 1.2f;
+                bearAudioSource.Play();
+                collisionAudioSource.Play();
+
+                if (globalScript != null)
+                {
+                    globalScript.UpdateSpeed(playerMoveSpeed);
+                }
+
+                if (collisionCount >= 3)
+                {
+                    StartCoroutine(MoveBearToPlayer(transform.position, 2f)); // Mover al oso directamente sobre el esquiador y esperar antes de cargar la escena
+                }
+                else
+                {
+                    invincibleCounter = invincibleLength;
+                    theSR.color = new Color(theSR.color.r, theSR.color.g, theSR.color.b, 0.5f);
+
+                }
+                if (collisionCount <= 3)
+                {
+                    StartCoroutine(MoveBearTowardsSkier());
+                }
             }
-            else
-            {
-                invincibleCounter = invincibleLength;
-                theSR.color = new Color(theSR.color.r, theSR.color.g, theSR.color.b,0.5f);
-            }
-            if (collisionCount <= 3)
-            {
-                StartCoroutine(MoveBearTowardsSkier());
-            }
-          }
 
             // Destruir el obstáculo al colisionar con el esquiador
             Destroy(other.gameObject);
@@ -298,7 +312,7 @@ public class CollisionController : MonoBehaviour
 
         // Calcular la nueva posición
         Vector2 newBearPosition = Vector2.MoveTowards(bearPosition, skierPosition, moveDistance);
-        
+
         // Mover de forma fluida
         float elapsedTime = 0f;
         float duration = 0.5f; // Duración del movimiento
@@ -315,6 +329,7 @@ public class CollisionController : MonoBehaviour
 
     private IEnumerator MoveBearToPlayer(Vector2 targetPosition, float duration)
     {
+        theSR.color = new Color(theSR.color.r, 0, 0, 0.5f);
         float elapsedTime = 0f;
         Vector2 startingPosition = bear.transform.position;
 
@@ -327,6 +342,7 @@ public class CollisionController : MonoBehaviour
 
         bear.transform.position = targetPosition; // Asegurarse de que el oso esté exactamente en la posición final
 
+        invincibleCounter = invincibleLength;
         // Cargar la escena de "Perder"
         StartCoroutine(WaitAndLoadScene(2f)); // Esperar 2 segundos
     }
