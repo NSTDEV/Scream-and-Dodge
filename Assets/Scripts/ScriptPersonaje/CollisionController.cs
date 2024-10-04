@@ -36,10 +36,6 @@ public class CollisionController : MonoBehaviour
                     // Mueve al oso hacia el jugador
                     bear.transform.position = Vector2.MoveTowards(bear.transform.position, transform.position, bearMoveSpeed * Time.deltaTime);
                     print(distance);
-                }
-                else
-                {
-                    // Cambiar de escena cuando el oso está lo suficientemente cerca
                     SceneManager.LoadScene("Lose"); // Reemplaza con el nombre de la escena a la que quieres ir
                 }
             }
