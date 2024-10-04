@@ -82,25 +82,20 @@ public class VoiceCommandController : MonoBehaviour
         isMovingCenter = true;
         isMovingRight = false;
         isMovingLeft = false;
-        // Puedes usar una interpolación suave aquí
         StartCoroutine(MoveToPosition(new Vector3(0, transform.position.y, transform.position.z)));
     }
 
     private IEnumerator MoveToPosition(Vector3 targetPosition)
     {
-        // Continuar moviendo hasta que esté cerca de la posición objetivo
         while (Vector3.Distance(transform.position, targetPosition) > 0.01f)
         {
-            // Calcular la dirección del movimiento
             Vector3 direction = (targetPosition - transform.position).normalized;
-
-            // Mover el objeto hacia la posición objetivo
             transform.position += direction * moveSpeed * Time.deltaTime;
 
-            yield return null; // Esperar un frame
+            yield return null;
         }
 
-        transform.position = targetPosition; // Asegúrate de llegar exactamente al destino
+        transform.position = targetPosition;
     }
 
     public bool isGrounded = true;

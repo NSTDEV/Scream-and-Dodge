@@ -11,7 +11,7 @@ public class MenuScript : MonoBehaviour
 
     void Start()
     {
-        keywords.Add("OSO", ChangeScene);
+        keywords.Add("OSO", () => ChangeScene("PruebaPersonaje"));
 
         keywordRecognizer = new KeywordRecognizer(keywords.Keys.ToArray());
         keywordRecognizer.OnPhraseRecognized += OnKeywordsRecognized;
@@ -27,9 +27,14 @@ public class MenuScript : MonoBehaviour
         }
     }
 
-    public void ChangeScene()
+    public void ChangeScene(string sceneName)
     {
-        SceneManager.LoadScene("PruebaPersonaje");
+        Time.timeScale = 1;
+        SceneManager.LoadScene(sceneName);
+    }
+
+    public void Restart(){
+        ChangeScene("Menu");
     }
 
     public void QuitGame()
