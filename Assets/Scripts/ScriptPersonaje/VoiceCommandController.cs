@@ -7,7 +7,7 @@ using System.Linq;
 public class VoiceCommandController : MonoBehaviour
 {
     public float moveSpeed = 5f;
-    public float jumpForce = 5f;
+    public float jumpForce = 8f;
     private Vector3 initialPosition;
 
     private KeywordRecognizer keywordRecognizer;
@@ -41,11 +41,11 @@ public class VoiceCommandController : MonoBehaviour
     private void Update()
     {
         // Movimientos basados en los comandos de voz
-        if (isMovingLeft && transform.position.x > -2.3f) // Límite izquierdo
+        if (isMovingLeft && transform.position.x > -3f) // Límite izquierdo
         {
             transform.Translate(Vector3.left * moveSpeed * Time.deltaTime);
         }
-        else if (isMovingRight && transform.position.x < 2.3f) // Límite derecho
+        else if (isMovingRight && transform.position.x < 3f) // Límite derecho
         {
             transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
         }
@@ -119,7 +119,7 @@ public class VoiceCommandController : MonoBehaviour
 
     private IEnumerator ReturnToGround()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
 
         rb.velocity = new Vector2(rb.velocity.x, -jumpForce); // Regresa a la posición inicial de manera más realista
 
