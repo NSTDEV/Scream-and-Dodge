@@ -2478,7 +2478,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6416982696893068408, guid: 2730bcd2e16a47546958ce27271addb4, type: 3}
       propertyPath: m_BodyType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6416982696893068408, guid: 2730bcd2e16a47546958ce27271addb4, type: 3}
       propertyPath: m_GravityScale
