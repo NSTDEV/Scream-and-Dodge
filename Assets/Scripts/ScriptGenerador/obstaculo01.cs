@@ -20,14 +20,5 @@ public class obstaculo01 : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-     private void OnCollisionEnter2D(Collision2D collision)
-    {
-        // Verificamos si colisiona con uno de los obstáculos
-        if (collision.gameObject.CompareTag("Esquiador"))
-        {
-         Destroy(gameObject);
-        }
-    }
   
 }

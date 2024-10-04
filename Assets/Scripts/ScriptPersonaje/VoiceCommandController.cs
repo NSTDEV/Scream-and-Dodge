@@ -7,7 +7,7 @@ using System.Linq;
 public class VoiceCommandController : MonoBehaviour
 {
     public float moveSpeed = 5f;
-    public float jumpForce = 8f;
+    public float jumpForce = 10f;
     private Vector3 initialPosition;
 
     private KeywordRecognizer keywordRecognizer;
@@ -57,6 +57,7 @@ public class VoiceCommandController : MonoBehaviour
             transform.position = new Vector3(transform.position.x, initialPosition.y, transform.position.z);
             rb.velocity = Vector2.zero; // Detener cualquier movimiento vertical
             isGrounded = true; // Permitir volver a saltar
+            GetComponent<Collider2D>().isTrigger = false; // Restablecer el collider a no ser un trigger
         }
     }
 
@@ -102,7 +103,7 @@ public class VoiceCommandController : MonoBehaviour
         transform.position = targetPosition; // Asegúrate de llegar exactamente al destino
     }
 
-    private bool isGrounded = true;
+    public bool isGrounded = true;
     private void Jump()
     {
         isMovingCenter = false;
@@ -114,12 +115,14 @@ public class VoiceCommandController : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             StartCoroutine(ReturnToGround());
             isGrounded = false;
+             // Cambiar el collider a trigger al saltar
+            GetComponent<Collider2D>().isTrigger = true;
         }
     }
 
     private IEnumerator ReturnToGround()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
 
         rb.velocity = new Vector2(rb.velocity.x, -jumpForce); // Regresa a la posición inicial de manera más realista
 
@@ -128,6 +131,7 @@ public class VoiceCommandController : MonoBehaviour
         {
             transform.position = new Vector3(transform.position.x, initialPosition.y, transform.position.z);
             isGrounded = true; // Permitir volver a saltar
+            
         }
         else
         {
