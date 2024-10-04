@@ -8,6 +8,7 @@ public class VoiceCommandController : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public float jumpForce = 10f;
+    public float invincibleLength = 2f; // Duración de la invulnerabilidad tras el salto
     private Vector3 initialPosition;
 
     private KeywordRecognizer keywordRecognizer;
@@ -15,17 +16,24 @@ public class VoiceCommandController : MonoBehaviour
 
     private Rigidbody2D rb;
 
+    // Nuevas variables para la invulnerabilidad
+    private float invincibleCounter;
+    private SpriteRenderer theSR;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         initialPosition = transform.position;
+
+        // Inicializamos el SpriteRenderer
+        theSR = GetComponent<SpriteRenderer>();
 
         keywords = new Dictionary<string, System.Action>
         {
             { "izquierda", MoveLeft },
             { "derecha", MoveRight },
             { "medio", MoveToCenter },
-            { "salto", Jump }
+            { "salta", Jump }
         };
 
         keywordRecognizer = new KeywordRecognizer(keywords.Keys.ToArray());
@@ -40,7 +48,7 @@ public class VoiceCommandController : MonoBehaviour
 
     private void Update()
     {
-        // Movimientos basados en los comandos de voz
+        // Controlar el movimiento horizontal
         if (isMovingLeft && transform.position.x > -3f) // Límite izquierdo
         {
             transform.Translate(Vector3.left * moveSpeed * Time.deltaTime);
@@ -50,14 +58,23 @@ public class VoiceCommandController : MonoBehaviour
             transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
         }
 
+        // Controlar invulnerabilidad
+        if (invincibleCounter > 0)
+        {
+            invincibleCounter -= Time.deltaTime;
+            if (invincibleCounter <= 0)
+            {
+                theSR.color = new Color(theSR.color.r, theSR.color.g, theSR.color.b, 1f); // Restaurar la transparencia
+            }
+        }
 
-        // Comprobación de posición Y
+        // Controlar posición en Y
         if (transform.position.y <= initialPosition.y)
         {
             transform.position = new Vector3(transform.position.x, initialPosition.y, transform.position.z);
-            rb.velocity = Vector2.zero; // Detener cualquier movimiento vertical
-            isGrounded = true; // Permitir volver a saltar
-            GetComponent<Collider2D>().isTrigger = false; // Restablecer el collider a no ser un trigger
+            rb.velocity = Vector2.zero;
+            isGrounded = true;
+            GetComponent<Collider2D>().isTrigger = false; // Restaurar el collider
         }
     }
 
@@ -110,7 +127,10 @@ public class VoiceCommandController : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             StartCoroutine(ReturnToGround());
             isGrounded = false;
-             // Cambiar el collider a trigger al saltar
+            
+            // Activar invulnerabilidad
+            invincibleCounter = invincibleLength;
+            theSR.color = new Color(theSR.color.r, theSR.color.g, theSR.color.b, 0.5f); // Cambiar transparencia
             GetComponent<Collider2D>().isTrigger = true;
         }
     }
@@ -119,19 +139,16 @@ public class VoiceCommandController : MonoBehaviour
     {
         yield return new WaitForSeconds(1.5f);
 
-        rb.velocity = new Vector2(rb.velocity.x, -jumpForce); // Regresa a la posición inicial de manera más realista
+        rb.velocity = new Vector2(rb.velocity.x, -jumpForce); // Simular la caída
 
-        // Aseguramos que el personaje regrese a la posición Y 0 si cae por debajo de 0.1
         if (transform.position.y <= initialPosition.y)
         {
             transform.position = new Vector3(transform.position.x, initialPosition.y, transform.position.z);
-            isGrounded = true; // Permitir volver a saltar
-            
-        }
-        else
-        {
-            // Si aún no ha llegado al suelo, puedes seguir aplicando gravedad
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y - jumpForce * Time.deltaTime); // Ejemplo de gravedad adicional
+            isGrounded = true;
+
+            // Desactivar invulnerabilidad al tocar el suelo
+            invincibleCounter = 0;
+            theSR.color = new Color(theSR.color.r, theSR.color.g, theSR.color.b, 1f); // Restaurar el color
         }
     }
 }
