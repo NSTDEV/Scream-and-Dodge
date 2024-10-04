@@ -2083,6 +2083,10 @@ PrefabInstance:
       propertyPath: bearMoveSpeed
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 2554666006912848497, guid: 5650896c10f0da341b6ef2b9849bd64e, type: 3}
+      propertyPath: invincibleLength
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4366696708057376543, guid: 5650896c10f0da341b6ef2b9849bd64e, type: 3}
       propertyPath: m_IsTrigger
       value: 1
