@@ -6,13 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-<<<<<<< Updated upstream
-    path: Assets/Scenes/ScreamAndDodge.unity
-=======
+    path: Assets/Scenes/PruebaPersonaje.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/Lose.unity
+    guid: d274851c9577fbf4d9d7412e91802232
+  - enabled: 1
     path: Assets/Scenes/Menu.unity
     guid: 970fd52f47211ea48837bb2027fd1cc6
-  - enabled: 1
-    path: Assets/Scenes/PruebaPersonaje.unity
->>>>>>> Stashed changes
-    guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects: {}
