@@ -2240,11 +2240,43 @@ PrefabInstance:
       propertyPath: m_Name
       value: Esquiador
       objectReference: {fileID: 0}
+    - target: {fileID: 5771301871284421696, guid: be46fc96f3be57647894cd7c9adebcae, type: 3}
+      propertyPath: m_TagString
+      value: Esquiador
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5771301871284421696, guid: be46fc96f3be57647894cd7c9adebcae, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1855342283}
   m_SourcePrefab: {fileID: 100100000, guid: be46fc96f3be57647894cd7c9adebcae, type: 3}
+--- !u!1 &1499388538 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7657406818347261972, guid: 2730bcd2e16a47546958ce27271addb4, type: 3}
+  m_PrefabInstance: {fileID: 2112238597}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1855342277 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5771301871284421696, guid: be46fc96f3be57647894cd7c9adebcae, type: 3}
+  m_PrefabInstance: {fileID: 1294217348}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1855342283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1855342277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88325a892f8912b4aa71b7f31a2060c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bear: {fileID: 1499388538}
+  moveSpeed: 75
+  distanceThreshold: 3
 --- !u!1 &1885979721
 GameObject:
   m_ObjectHideFlags: 0
@@ -2708,7 +2740,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 663492473914658218, guid: 2730bcd2e16a47546958ce27271addb4, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 5.58
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 663492473914658218, guid: 2730bcd2e16a47546958ce27271addb4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2724,7 +2756,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7657406818347261972, guid: 2730bcd2e16a47546958ce27271addb4, type: 3}
       propertyPath: m_Name
-      value: OSO
+      value: bear
       objectReference: {fileID: 0}
     - target: {fileID: 8284845042981983904, guid: 2730bcd2e16a47546958ce27271addb4, type: 3}
       propertyPath: m_Enabled

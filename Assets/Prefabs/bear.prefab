@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5064378643723597600}
   - component: {fileID: 8284845042981983904}
   m_Layer: 0
-  m_Name: OSO
+  m_Name: bear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

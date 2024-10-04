@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Obstacle
+  - Obstacle2
+  - Obstacle3
+  - Obstacle4
+  - Esquiador
   layers:
   - Default
   - TransparentFX
