@@ -6,8 +6,8 @@ using System.Linq;
 
 public class VoiceCommandController : MonoBehaviour
 {
-    public float moveSpeed = 5f;
-    public float jumpForce = 10f;
+    [SerializeField] public float moveSpeed = 10f;
+    public float jumpForce = 5f;
     private Vector3 initialPosition;
 
     private KeywordRecognizer keywordRecognizer;
@@ -110,7 +110,12 @@ public class VoiceCommandController : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             StartCoroutine(ReturnToGround());
             isGrounded = false;
-             // Cambiar el collider a trigger al saltar
+            // Cambiar el collider a trigger al saltar
+
+            // Cambiar la posición en z y activar el trigger del collider
+            Vector3 newPosition = transform.position;
+            newPosition.z = -3; // Cambiar solo el valor en el eje Z
+            transform.position = newPosition;
             GetComponent<Collider2D>().isTrigger = true;
         }
     }
@@ -124,9 +129,8 @@ public class VoiceCommandController : MonoBehaviour
         // Aseguramos que el personaje regrese a la posición Y 0 si cae por debajo de 0.1
         if (transform.position.y <= initialPosition.y)
         {
-            transform.position = new Vector3(transform.position.x, initialPosition.y, transform.position.z);
+            transform.position = new Vector3(transform.position.x, initialPosition.y, initialPosition.z);
             isGrounded = true; // Permitir volver a saltar
-            
         }
         else
         {
